@@ -1,0 +1,25 @@
+server:
+  port: 9005
+
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    jdbc-url: jdbc:h2:file:~/sdb-db-adv;MODE=MySQL;
+    username: sa
+    password: sa
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        trace: false
+        web-allow-others: true
+  sql:
+    init:
+      data-locations: classpath:sql/mall_db_data.sql
+      schema-locations: classpath:sql/mall_db_schema.sql
+      mode: always
+
+logging:
+  level:
+    org.springframework.jdbc.core.JdbcTemplate: DEBUG

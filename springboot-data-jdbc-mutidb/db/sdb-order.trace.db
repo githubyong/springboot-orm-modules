@@ -1,0 +1,12 @@
+2022-02-25 23:53:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT ORDER_ITEM.* ORDER_ITEM INNER[*] JOIN ORDER_INFO ON(ORDER_INFO.ORDER_SN=ORDER_ITEM.ORDER_SN) WHERE ORDER_INFO.ID=?"; SQL statement:
+select order_item.* order_item inner join order_info on(order_info.ORDER_SN=order_item.ORDER_SN) where order_info.ID=? [42000-200]
+2022-02-25 23:54:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ORDER_ITEM" not found; SQL statement:
+select order_item.* from order_item inner join order_info on(order_info.ORDER_SN=order_item.ORDER_SN) where order_info.ID=? [42102-200]
+2022-02-25 23:56:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ORDER_ITEM" not found; SQL statement:
+select order_item.* from order_item inner join order_info on(order_info.ORDER_SN=order_item.ORDER_SN) where order_info.ID=? [42102-200]
+2022-02-26 00:01:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ORDER_ITEM" not found; SQL statement:
+select order_item.* from order_item inner join order_info on(order_info.ORDER_SN=order_item.ORDER_SN) where order_info.ID=? [42102-200]

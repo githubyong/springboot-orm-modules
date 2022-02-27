@@ -1,0 +1,32 @@
+server:
+  port: 9004
+
+h2_db_dir: @h2db_dir@
+
+spring:
+  datasource:
+    userdb:
+      driver-class-name: org.h2.Driver
+      jdbc-url: jdbc:h2:file:${h2_db_dir}/sdb-user;MODE=MySQL;MV_STORE=true
+      username: sa
+      password: sa
+
+    orderdb:
+      driver-class-name: org.h2.Driver
+      jdbc-url: jdbc:h2:file:${h2_db_dir}/sdb-order;MODE=MySQL;MV_STORE=true
+      username: sa
+      password: sa
+
+  h2:
+    console:
+      enabled: true
+      #  h2 访问路径上下文
+      path: /h2-console
+      settings:
+        trace: false
+        #      允许console 远程访问 默认false
+        web-allow-others: true
+
+logging:
+  level:
+    org.springframework.jdbc.core.JdbcTemplate: DEBUG
