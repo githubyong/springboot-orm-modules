@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>springboot-orm-modules</artifactId>
+        <groupId>org.example</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>springboot-data-querydsl</artifactId>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <infobip-spring-data-jdbc-querydsl.version>6.2.1</infobip-spring-data-jdbc-querydsl.version>
+        <h2db_dir>${project.basedir}/db</h2db_dir>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.infobip</groupId>
+            <artifactId>infobip-spring-data-jdbc-querydsl-boot-starter</artifactId>
+            <version>${infobip-spring-data-jdbc-querydsl.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>1.7.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>camel</id>
+            <properties>
+                <profile.dbName>db-qdsl-camel</profile.dbName>
+                <profile.tableNamePattern>Student,Score</profile.tableNamePattern>
+            </properties>
+        </profile>
+        <profile>
+            <id>upper</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profile.dbName>db-qdsl-upper</profile.dbName>
+                <profile.tableNamePattern>STUDENT,SCORE</profile.tableNamePattern>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-maven-plugin</artifactId>
+                <version>4.1.4</version>
+                <configuration>
+                    <jdbcDriver>org.h2.Driver</jdbcDriver>
+                    <jdbcUrl>jdbc:h2:file:${h2db_dir}/${profile.dbName};MODE=MySQL;MV_STORE=true</jdbcUrl>
+                    <packageName>org.example.querydsl.entity</packageName>
+                    <targetFolder>${project.basedir}/target/generated-sources</targetFolder>
+                    <sourceFolder>src/main/resources</sourceFolder>
+                    <exportBeans>true</exportBeans>
+                    <beanAddToString>true</beanAddToString>
+                    <beanPackageName>org.example.querydsl.entity</beanPackageName>
+                    <tableNamePattern>${profile.tableNamePattern}</tableNamePattern>
+<!--                    <tableNamePattern>STUDENT,SCORE</tableNamePattern>-->
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.h2database</groupId>
+                        <artifactId>h2</artifactId>
+                        <version>1.4.200</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>export</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <parameters>true</parameters>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>

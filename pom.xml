@@ -12,6 +12,8 @@
         <module>springboot-data-jdbc-min</module>
         <module>springboot-data-jdbc-mutidb</module>
         <module>springboot-data-jdbc-advance</module>
+        <module>springboot-data-querydsl</module>
+        <module>springboot-data-querydsl2</module>
     </modules>
     <packaging>pom</packaging>
 
